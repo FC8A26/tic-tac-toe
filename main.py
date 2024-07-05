@@ -18,6 +18,7 @@ while True:
         print("X")
     elif board[0] == 2:
         print("O")
+
     if board[0] == 1:
         board[0] = 2
     elif board[0] == 2:
@@ -25,4 +26,6 @@ while True:
 
     # For future
     index = input("Position: ")
+    if index == "c":
+        break
     
