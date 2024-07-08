@@ -16,7 +16,7 @@ def main():
     print("---------")
     print("6 | 7 | 8\n")
     input("Click enter to start.")
-
+    
     while True:
         # Bot move
         reload_screen()
