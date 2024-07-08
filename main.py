@@ -16,6 +16,7 @@ def main():
     print("---------")
     print("6 | 7 | 8\n")
     input("Click enter to start.")
+
     while True:
         # Bot move
         reload_screen()
@@ -80,12 +81,12 @@ def get_gamestate():
         [2, 4, 6],
     ]
 
-    # Check for a win
+    # Check for win/lose
     for combo in winning_combinations:
         if board[combo[0]] == board[combo[1]] == board[combo[2]] != 0:
             return board[combo[0]]
 
-    # Check for a draw
+    # Check for draw
     if not 0 in board:
         return 0
 
