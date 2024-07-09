@@ -6,44 +6,42 @@ board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
 def main():
-    # Tutorial
-    clear_screen()
-    print("Welcome to Tic-Tac-Toe!")
-    print("You play as O's. On your turn, enter a position:\n")
-    print("0 | 1 | 2")
-    print("---------")
-    print("3 | 4 | 5")
-    print("---------")
-    print("6 | 7 | 8\n")
-    input("Click enter to start.")
-    
-    while True:
-        # Bot move
-        reload_screen()
-        index = 0
+    try:
+        # Tutorial
+        clear_screen()
+        print("Welcome to Tic-Tac-Toe!")
+        print("You play as O's. On your turn, enter a position:\n")
+        print("0 | 1 | 2")
+        print("---------")
+        print("3 | 4 | 5")
+        print("---------")
+        print("6 | 7 | 8\n")
+        input("Click enter to start.")
+        
         while True:
-            if board[index] == 0:
-                break
-            else:
-                index += 1
-        board[index] = 1
-
-        # Player move
-        while True:
+            # Bot move
             reload_screen()
-            index = input("Position: ")
-            try:
-                index = int(index)
-            except ValueError:
-                input("Please input an integer")
-                continue
-            if index < 0 or index > 8:
-                input("Out of range")
-            elif board[index] != 0:
-                input("Square is already occupied")
-            else:
-                board[index] = 2
-                break
+            bot_move()
+
+            # Player move
+            while True:
+                reload_screen()
+                index = input("Position: ")
+                try:
+                    index = int(index)
+                except ValueError:
+                    input("Please input an integer")
+                    continue
+                if index < 0 or index > 8:
+                    input("Out of range")
+                elif board[index] != 0:
+                    input("Square is already occupied")
+                else:
+                    board[index] = 2
+                    break
+    except KeyboardInterrupt:
+        clear_screen()
+        sys.exit()
             
 
 def clear_screen():
@@ -103,6 +101,16 @@ def reload_screen():
         sys.exit("Player wins")
     elif gamestate == 0:
         sys.exit("Draw")
+
+
+def bot_move():
+    index = 0
+    while True:
+        if board[index] == 0:
+            break
+        else:
+            index += 1
+    board[index] = 1
 
 
 main()
