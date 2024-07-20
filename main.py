@@ -15,13 +15,20 @@ winning_combinations = [
 
 two_combinations = [
     [[0, 1], 2],
+    [[0, 2], 1],
     [[0, 3], 6],
     [[0, 4], 8],
+    [[0, 6], 3],
+    [[0, 8], 4],
     [[1, 2], 0],
     [[1, 4], 7],
+    [[1, 7], 4],
     [[2, 4], 6],
     [[2, 5], 8],
+    [[2, 6], 4],
+    [[2, 8], 5],
     [[3, 4], 5],
+    [[3, 5], 4],
     [[3, 6], 0],
     [[4, 5], 3],
     [[4, 6], 2],
@@ -29,6 +36,7 @@ two_combinations = [
     [[4, 8], 0],
     [[5, 8], 2],
     [[6, 7], 8],
+    [[6, 8], 7],
     [[7, 8], 6],
 ]
 
@@ -126,10 +134,6 @@ def reload_screen():
 
 
 def bot_move(): # Returns an index of board list
-    # Get X and O positions in two lists
-    x_cells = [index for index, value in enumerate(board) if value == 1]
-    o_cells = [index for index, value in enumerate(board) if value == 2]
-
     for combo in two_combinations:
         if board[combo[0][0]] == board[combo[0][1]] == 1 and board[combo[1]] == 0:
             return combo[1]
@@ -138,6 +142,8 @@ def bot_move(): # Returns an index of board list
         if board[combo[0][0]] == board[combo[0][1]] == 2 and board[combo[1]] == 0:
             return combo[1]
 
+    
+    # Add specific combinations for double threats, etc.
     index = 0
     while True:
         if board[index] == 0:
