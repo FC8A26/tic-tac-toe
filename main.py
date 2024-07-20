@@ -2,6 +2,36 @@ import sys
 import os
 import platform
 
+winning_combinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+]
+
+two_combinations = [
+    [[0, 1], 2],
+    [[0, 3], 6],
+    [[0, 4], 8],
+    [[1, 2], 0],
+    [[1, 4], 7],
+    [[2, 4], 6],
+    [[2, 5], 8],
+    [[3, 4], 5],
+    [[3, 6], 0],
+    [[4, 5], 3],
+    [[4, 6], 2],
+    [[4, 7], 1],
+    [[4, 8], 0],
+    [[5, 8], 2],
+    [[6, 7], 8],
+    [[7, 8], 6],
+]
+
 board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
@@ -12,7 +42,7 @@ def main():
         while True:
             # Bot move
             reload_screen()
-            bot_move()
+            board[bot_move()] = 1
 
             # Player move       
             while True:
@@ -71,17 +101,6 @@ def print_board():
 
 
 def get_gamestate():
-    winning_combinations = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-    ]
-
     # Check for win/lose
     for combo in winning_combinations:
         if board[combo[0]] == board[combo[1]] == board[combo[2]] != 0:
@@ -106,14 +125,26 @@ def reload_screen():
         sys.exit("Draw")
 
 
-def bot_move():
+def bot_move(): # Returns an index of board list
+    # Get X and O positions in two lists
+    x_cells = [index for index, value in enumerate(board) if value == 1]
+    o_cells = [index for index, value in enumerate(board) if value == 2]
+
+    for combo in two_combinations:
+        if board[combo[0][0]] == board[combo[0][1]] == 1 and board[combo[1]] == 0:
+            return combo[1]
+
+    for combo in two_combinations:
+        if board[combo[0][0]] == board[combo[0][1]] == 2 and board[combo[1]] == 0:
+            return combo[1]
+
     index = 0
     while True:
         if board[index] == 0:
             break
         else:
             index += 1
-    board[index] = 1
+    return index
 
 
 main()
