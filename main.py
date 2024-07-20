@@ -7,23 +7,14 @@ board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 def main():
     try:
-        # Tutorial
-        clear_screen()
-        print("Welcome to Tic-Tac-Toe!")
-        print("You play as O's. On your turn, enter a position:\n")
-        print("0 | 1 | 2")
-        print("---------")
-        print("3 | 4 | 5")
-        print("---------")
-        print("6 | 7 | 8\n")
-        input("Click enter to start.")
-        
+        tutorial()
+
         while True:
             # Bot move
             reload_screen()
             bot_move()
 
-            # Player move
+            # Player move       
             while True:
                 reload_screen()
                 index = input("Position: ")
@@ -49,6 +40,18 @@ def clear_screen():
         os.system("cls")
     else:
         os.system("clear")
+
+
+def tutorial():
+    clear_screen()
+    print("Welcome to Tic-Tac-Toe!")
+    print("You play as O's. On your turn, enter a position:\n")
+    print("0 | 1 | 2")
+    print("---------")
+    print("3 | 4 | 5")
+    print("---------")
+    print("6 | 7 | 8\n")
+    input("Click enter to start.")
 
 
 def print_board():
